@@ -1,6 +1,6 @@
 # Ultimate Conversion Calculator
 # Author: Ethan du Toit
-# Version: V1.0
+# Version: V2.0
 
 # VALUE DICTIONARIES - references back to these dictionaries when user asks to convert values
 # 1️⃣ Distance Dictionary
@@ -41,15 +41,17 @@ volume_dict = {
 
 
 def inputvalue(message):
-    while True:
+    done = False
+    while not done:
         try:
-            userInput = int(input(message))
+            userInput = float(input(message))
             if userInput > 0:
                 done = True
             else:
                 print(integererror)
         except ValueError:
             print(integererror)
+    return(userInput)
 
 print("\n🎉 WELCOME TO THE ULTIMATE CONVERSION CALCULATOR! 🎉")
 
@@ -58,26 +60,34 @@ while keep_going == "":
 
     
     done = False
+    typeerror = "Please enter a valid conversion type "
     error = "Please enter a valid conversion type "
     integererror = "Please enter a valid number "
+
+    def get_valid_input(prompt, valid_values): # function that checks for valid input
+        while True:
+            user_input = input(prompt)
+            if user_input in valid_values:
+                return user_input
+            else:
+                print(typeerror)
+
     while not done:
         conversion_type = str(input("\nPlease enter the conversion type that you wish to complete.\nAcceptable conversion types:\n- 🧭 'distance'\n- 🏋️‍♂️ 'mass'\n- ⏰ 'time'\n- 🍾 'volume'\n\nCONVERSION TYPE: ").lower())
         if conversion_type == "distance":
             # Distance conversion
-            
-            amount = inputvalue("\nHow much? ")
-
-            from_unit = input("From Unit? ")
-            if from_unit == "mm" or from_unit == "cm" or from_unit == "m" or from_unit == "km":
-                continue
-            else:
-                print(error)
-
-            to_unit = input("To Unit? ")
-            if to_unit == "mm" or to_unit == "cm" or to_unit == "m" or to_unit == "km":
-                continue
-            else:
-                print(error)
+            while True:
+                try:
+                    amount = float(input("\nHow much? "))
+                    if amount > 0:
+                        break # Exits loop if valid number is provided
+                    else:
+                        print(integererror)
+                except ValueError:
+                    print(integererror)  
+        
+            from_unit = get_valid_input("From Unit? ", ["mm","cm","m","km"])
+            to_unit = get_valid_input("To Unit? ", ["mm","cm","m","km"])
             
             multiply_by = distance_dict[to_unit]/distance_dict[from_unit]
             standard = amount * multiply_by
@@ -94,7 +104,7 @@ while keep_going == "":
             done = True
 
         elif conversion_type == "time":
-            # Mass conversion
+            # Time conversion
             amount = float(input("\nHow much? "))
             from_unit = input("From Unit? ")
             to_unit = input("To Unit? ")
@@ -104,7 +114,7 @@ while keep_going == "":
             done = True
 
         elif conversion_type == "volume":
-            # Mass conversion
+            # Volume conversion
             amount = float(input("\nHow much? "))
             from_unit = input("From Unit? ")
             to_unit = input("To Unit? ")
