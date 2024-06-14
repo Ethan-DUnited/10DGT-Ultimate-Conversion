@@ -1,6 +1,6 @@
 # Ultimate Conversion Calculator
 # Author: Ethan du Toit
-# Version: V3.5
+# Version: V3.6
 
 # VALUE DICTIONARIES - references back to these dictionaries when user asks to convert values
 # 1️⃣ Distance Dictionary
@@ -150,7 +150,7 @@ while keep_going == "":
             print(error)
 
     # GIVES USER CONVERSION RESULT       
-    print(f"\n----------\n🔑 RESULT: There are {standard} {to_unit} in {amount} {from_unit}\n")
+    print(f"\n----------\n🔑 RESULT: There are {standard}{to_unit} in {amount}{from_unit}\n")
 
     # LOOPS PROGRAM AGAIN IF REQUESTED (uses while loop in lines 44-46)
     keep_going = input("Press ENTER ⏎ to complete another calculation, or any other key to end the program. ")
