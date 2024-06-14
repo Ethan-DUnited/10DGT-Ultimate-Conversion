@@ -1,6 +1,6 @@
 # Ultimate Conversion Calculator
 # Author: Ethan du Toit
-# Version: V3.6
+# Version: V3.7
 
 # VALUE DICTIONARIES - references back to these dictionaries when user asks to convert values
 # 1️⃣ Distance Dictionary
@@ -39,20 +39,21 @@ volume_dict = {
     "mL": 0.000001
 }
 
+
 print("\n🎉 WELCOME TO THE ULTIMATE CONVERSION CALCULATOR! 🎉") # Welcomes user to program
 
 keep_going = ""
-keep_going = input("Press <ENTER> ⏎ to continue, or any other key to end the program. ")
+keep_going = input("Press <ENTER> ⏎ to continue, or any other key to end the program. ") # Keep going loop gives the user the option to quit the program if they don't wish to continue anymore
 
-# While loop - used at the end if user wants to repeat program another time.
-
-while keep_going == "":
+while keep_going == "": # While loop - used at the end if user wants to repeat program another time.
     
     done = False
+
+    # Error messages - shown to user if they enter an invalid value
     error = "⛔️ Please enter a valid conversion type ⛔️"
     integererror = "⛔️ Please enter a valid number (integer must be higher than zero) ⛔️"
 
-    # VALID INPUT CHECKER FUNCTION
+    # Valid input checker function - used to make sure user enters the correct conversion values, otherwise shows error.
     def get_valid_input(prompt, valid_values):
         while True:
             user_input = input(prompt)
@@ -65,7 +66,7 @@ while keep_going == "":
     while not done:
         conversion_type = str(input("\nPlease enter the conversion type that you wish to complete.\nAcceptable conversion types are listed below (case sensitive):\n- 🧭 'distance'\n- 🏋️‍♂️ 'mass'\n- ⏰ 'time'\n- 🍾 'volume'\n\nCONVERSION TYPE? ").lower())
 
-        # 🧭 DISTANCE CONVERSION CALCULATOR
+        # 🧭 DISTANCE CONVERSION CALCULATOR - user enters amount & the from and to units. Program then converts and gives output at end of program
         if conversion_type == "distance":
             while True:
                 try:
@@ -77,16 +78,18 @@ while keep_going == "":
                 except ValueError:
                     print(integererror) 
         
+            # Asks user to input their "to" and "from" values
             from_unit = get_valid_input("\nAcceptable distance unit types are listed below: (case sensitive)\n1. mm\n2. cm\n3. m\n4. km\n\nFrom Unit? ", ["mm","cm","m","km"])
             print()
             to_unit = get_valid_input("\nAcceptable distance unit types are listed below: (case sensitive)\n1. mm\n2. cm\n3. m\n4. km\n\nTo Unit? ", ["mm","cm","m","km"])
             
+            # Completes calculation, referencing back to dictionary
             multiply_by = distance_dict[to_unit]/distance_dict[from_unit]
             standard = amount * multiply_by
             done = True
            
         
-        # 🏋️‍♂️ MASS CONVERSION CALCULATOR
+        # 🏋️‍♂️ MASS CONVERSION CALCULATOR - user enters amount & the from and to units. Program then converts and gives output at end of program
         elif conversion_type == "mass":
             while True:
                 try:
@@ -98,15 +101,17 @@ while keep_going == "":
                 except ValueError:
                     print(integererror)  
 
+            # Asks user to input their "to" and "from" values
             from_unit = get_valid_input("Acceptable mass unit types are listed below: (case sensitive)\n1. mg\n2. g\n3. kg\n4. t\n\nFrom Unit? ", ["mg","g","kg","t"])
             print()
             to_unit = get_valid_input("Acceptable mass unit types are listed below: (case sensitive)\n1. mg\n2. g\n3. kg\n4. t\n\nTo Unit? ", ["mg","g","kg","t"])
 
+            # Completes calculation, referencing back to dictionary
             multiply_by = mass_dict[to_unit]/mass_dict[from_unit]
             standard = amount * multiply_by
             done = True
 
-        # ⏰ TIME CONVERSION CALCULATOR
+        # ⏰ TIME CONVERSION CALCULATOR - user enters amount & the from and to units. Program then converts and gives output at end of program
         elif conversion_type == "time":
             while True:
                 try:
@@ -118,15 +123,17 @@ while keep_going == "":
                 except ValueError:
                     print(integererror)
 
+            # Asks user to input their "to" and "from" values
             from_unit = get_valid_input("Acceptable time unit types are listed below: (case sensitive)\n1. ms\n2. s\n3. min\n4. hr\n5. day\n6. week\n7. month\n8. yr\n\nFrom Unit? ", ["ms","s","min","hr","day","week","month","yr"])
             print()
             to_unit = get_valid_input("Acceptable time unit types are listed below: (case sensitive)\n1. ms\n2. s\n3. min\n4. hr\n5. day\n6. week\n7. month\n8. yr\n\nTo Unit? ", ["ms","s","min","hr","day","week","month","yr"])
 
+            # Completes calculation, referencing back to dictionary
             multiply_by = time_dict[to_unit]/time_dict[from_unit]
             standard = amount * multiply_by
             done = True
 
-        # 🍾 VOLUME CONVERSION CALCULATOR
+        # 🍾 VOLUME CONVERSION CALCULATOR - user enters amount & the from and to units. Program then converts and gives output at end of program
         elif conversion_type == "volume":
             while True:
                 try:
@@ -138,18 +145,21 @@ while keep_going == "":
                 except ValueError:
                     print(integererror)
 
+            # Asks user to input their "to" and "from" values
             from_unit = get_valid_input("Acceptable volume unit types are listed below: (case sensitive)\n1. ml\n2. l\n3. kL\n4. mL\n\nFrom Unit? ", ["ml","l","kL","mL"])
             print()
             to_unit = get_valid_input("Acceptable volume unit types are listed below: (case sensitive)\n1. ml\n2. l\n3. kL\n4. mL\n\nTo Unit? ", ["ml","l","kL","mL"])
 
+            # Completes calculation, referencing back to dictionary
             multiply_by = volume_dict[to_unit]/volume_dict[from_unit]
             standard = amount * multiply_by
             done = True
 
+        # IF USER ENTERS ANYTHING OTHER THAN SPECIFIED CONVERSION TYPES, ERROR MESSAGE SHOWS AND PROMPT REPEATS.
         else:
             print(error)
 
-    # GIVES USER CONVERSION RESULT       
+    # Program takes result and prints it out for user to see converted value.      
     print(f"\n----------\n🔑 RESULT: There are {standard}{to_unit} in {amount}{from_unit}\n")
 
     # LOOPS PROGRAM AGAIN IF REQUESTED (uses while loop in lines 44-46)
