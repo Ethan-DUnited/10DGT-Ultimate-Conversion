@@ -1,6 +1,6 @@
 # Ultimate Conversion Calculator
 # Author: Ethan du Toit
-# Version: V3.0
+# Version: V3.5
 
 # VALUE DICTIONARIES - references back to these dictionaries when user asks to convert values
 # 1️⃣ Distance Dictionary
@@ -41,14 +41,16 @@ volume_dict = {
 
 print("\n🎉 WELCOME TO THE ULTIMATE CONVERSION CALCULATOR! 🎉") # Welcomes user to program
 
-# While loop - used at the end if user wants to repeat program another time.
 keep_going = ""
-while keep_going == "":
+keep_going = input("Press <ENTER> ⏎ to continue, or any other key to end the program. ")
 
-    #
+# While loop - used at the end if user wants to repeat program another time.
+
+while keep_going == "":
+    
     done = False
-    error = "Please enter a valid conversion type "
-    integererror = "Please enter a valid number "
+    error = "⛔️ Please enter a valid conversion type ⛔️"
+    integererror = "⛔️ Please enter a valid number (integer must be higher than zero) ⛔️"
 
     # VALID INPUT CHECKER FUNCTION
     def get_valid_input(prompt, valid_values):
